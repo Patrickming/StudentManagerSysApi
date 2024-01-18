@@ -78,4 +78,26 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    @Override
+    public boolean update(Map<String, Object> condition) {
+        //因为是修改不同的表 所以要判断 交给数据库去进行条件判断
+        switch (condition.get("level").toString()) {
+            case "0":
+                condition.put("table", "admin");
+                break;
+            case "1":
+                condition.put("table", "teacher");
+                break;
+            case "2":
+                condition.put("table", "student");
+                break;
+        }
+        Integer num = userMapper.checkPasswordCount(condition);
+        if (num != 0) {
+            userMapper.update(condition);
+        }
+        return num != 0;
+    }
+
 }
