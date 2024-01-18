@@ -47,6 +47,7 @@ public class UploadServiceImpl implements UploadService {
 
     @Override
     public String getHeader(Map<String, Object> condition) {
+        //返回数据库存的图片url然后找到对应存放的路径然后返回给前端
         String imgUrl = uploadMapper.getHead(condition);
         return imgUrl == null ? "" : imgUrl.substring(imgUrl.indexOf("/"));
     }
