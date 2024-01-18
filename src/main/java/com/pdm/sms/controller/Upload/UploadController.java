@@ -4,7 +4,6 @@ import com.pdm.sms.domain.Upload;
 import com.pdm.sms.service.Upload.UploadService;
 import com.pdm.sms.utils.Token.UserLoginToken;
 import com.pdm.sms.utils.image.ResourceUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +53,7 @@ public class UploadController {
                 Path path = Paths.get(staticDir + newName);
                 // 写入文件
                 Files.write(path, bytes);
-                String imgUrl = "/files" + newName;
+                String imgUrl = "/files/" + newName;
 
                 String userId = request.getParameter("id");
                 int level = parseInt(request.getParameter("level"));
