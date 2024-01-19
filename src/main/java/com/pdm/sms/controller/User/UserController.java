@@ -43,4 +43,14 @@ public class UserController {
         user.setRefreshToken(refreshToken);
         return user;
     }
+
+    @GetMapping("/edit/password")
+    public boolean update(@RequestParam Map<String, Object> condition) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", condition.get("username").toString());
+        map.put("password", condition.get("password").toString());
+        map.put("passwordAgain", condition.get("passwordAgain").toString());
+        map.put("level", condition.get("level").toString());
+        return userService.update(map);
+    }
 }

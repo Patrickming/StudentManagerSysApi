@@ -31,4 +31,11 @@ public interface UserService {
      * return: User
      */
     User findUser(Map<String, Object> condition);
+
+    /**
+     * description: 修改密码
+     * @param condition
+     * @return void
+     */
+    boolean update(Map<String, Object> condition);
 }
