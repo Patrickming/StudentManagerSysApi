@@ -33,6 +33,11 @@
         where name = #{name}
     </select>
 
+    <select id="getProfessionList" resultMap="BaseUserMap" parameterType="map">
+        SELECT *
+        from profession
+    </select>
+
 
 </mapper>
 
