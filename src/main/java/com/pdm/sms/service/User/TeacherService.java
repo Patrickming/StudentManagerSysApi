@@ -1,8 +1,11 @@
 package com.pdm.sms.service.User;
 
 import com.pdm.sms.dto.User;
+import com.pdm.sms.utils.page.PagingResult;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xrm
@@ -32,4 +35,13 @@ public interface TeacherService {
      * @return void
      */
     void update(User user);
+
+    /**
+     * description: 获取教师账号信息列表
+     * @param rowBounds
+     * @param condition
+     * @return com.pdm.sms.utils.PagingResult
+     */
+    PagingResult<User> getTeacherList(RowBounds rowBounds, Map<String, Object> condition);
 }
+

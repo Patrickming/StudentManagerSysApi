@@ -2,8 +2,11 @@ package com.pdm.sms.service.User;
 
 
 import com.pdm.sms.dto.User;
+import com.pdm.sms.utils.page.PagingResult;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xrm
@@ -35,4 +38,11 @@ public interface AdminService {
      */
     void update(User user);
 
+    /**
+     * description: 获取学生账号信息列表
+     * @param rowBounds
+     * @param condition
+     * @return com.pdm.sms.utils.PagingResult
+     */
+    PagingResult<User> getAdminList(RowBounds rowBounds, Map<String, Object> condition);
 }

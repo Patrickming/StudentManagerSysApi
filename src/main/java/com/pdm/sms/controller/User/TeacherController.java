@@ -2,6 +2,7 @@ package com.pdm.sms.controller.User;
 
 import com.pdm.sms.dto.User;
 import com.pdm.sms.service.User.TeacherService;
+import com.pdm.sms.utils.page.PagingResult;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,13 @@ public class TeacherController {
         teacherService.delete(idsList);
     }
 
+    @GetMapping("/getTeacherList")
+    public PagingResult<User> getTeacherList(@RequestParam Map<String, Object> condition,
+                                             @RequestParam(required = false, name = "$limit", defaultValue = "10") Integer limit,
+                                             @RequestParam(required = false, name = "$offset", defaultValue = "0") Integer offset) {
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        return teacherService.getTeacherList(rowBounds, condition);
+    }
 
 }
 

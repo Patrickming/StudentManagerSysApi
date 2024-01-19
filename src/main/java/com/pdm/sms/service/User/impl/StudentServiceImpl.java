@@ -1,10 +1,13 @@
 package com.pdm.sms.service.User.impl;
 
+import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dao.Profession.ProfessionMapper;
 import com.pdm.sms.dao.User.StudentMapper;
 import com.pdm.sms.domain.Profession;
 import com.pdm.sms.dto.User;
 import com.pdm.sms.service.User.StudentService;
+import com.pdm.sms.utils.page.PagingResult;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,5 +77,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void update(User user) {
         studentMapper.update(user);
+    }
+
+    @Override
+    public PagingResult<User> getStudentList(RowBounds rowBounds, Map<String, Object> condition) {
+        PageRowBounds pageRowBounds = new PageRowBounds(rowBounds.getOffset(), rowBounds.getLimit());
+        List<User> StudentInfoList = studentMapper.getStudentList(pageRowBounds, condition);
+        return new PagingResult<>(StudentInfoList, pageRowBounds.getTotal());
     }
 }

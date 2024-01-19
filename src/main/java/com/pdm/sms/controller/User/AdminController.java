@@ -9,11 +9,14 @@ package com.pdm.sms.controller.User;
 import com.pdm.sms.dto.User;
 
 import com.pdm.sms.service.User.AdminService;
+import com.pdm.sms.utils.page.PagingResult;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/sms/user/admin")
@@ -36,5 +39,16 @@ public class AdminController {
         List<Integer> idsList = Arrays.asList(ids);
         adminService.delete(idsList);
     }
+
+    @GetMapping("/getAdminList")
+    public PagingResult<User> getAdminList(@RequestParam Map<String, Object> condition,
+                                           @RequestParam(required = false, name = "$limit", defaultValue = "10") Integer limit,
+                                           @RequestParam(required = false, name = "$offset", defaultValue = "0") Integer offset) {
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        return adminService.getAdminList(rowBounds, condition);
+    }
+
+
+
 
 }

@@ -1,12 +1,16 @@
 package com.pdm.sms.service.User.impl;
 
+import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dao.User.TeacherMapper;
 import com.pdm.sms.dto.User;
 import com.pdm.sms.service.User.TeacherService;
+import com.pdm.sms.utils.page.PagingResult;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xrm
@@ -30,7 +34,7 @@ public class TeacherServiceImpl implements TeacherService {
         } else {
             str = Integer.toString(num);
         }
-        String no = "389"+str+user.getSex().toString(); //默认前缀
+        String no = "389" + str + user.getSex().toString(); //默认前缀
         user.setUsername(no);
         user.setId(no);
         user.setPassword("123456"); //默认密码
@@ -47,4 +51,10 @@ public class TeacherServiceImpl implements TeacherService {
         teacherMapper.update(user);
     }
 
+    @Override
+    public PagingResult<User> getTeacherList(RowBounds rowBounds, Map<String, Object> condition) {
+        PageRowBounds pageRowBounds = new PageRowBounds(rowBounds.getOffset(), rowBounds.getLimit());
+        List<User> TeacherInfoList = teacherMapper.getTeacherList(pageRowBounds, condition);
+        return new PagingResult<>(TeacherInfoList, pageRowBounds.getTotal());
+    }
 }

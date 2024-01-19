@@ -105,10 +105,20 @@
     </update>
 
     <select id="checkCodeCount" resultType="int">
-        select
-            count(0)
-        from
-            `admin`
+        select count(0)
+        from `admin`
+    </select>
+
+    <select id="getAdminList" resultMap="BaseUserMap" parameterType="map">
+        SELECT
+        *
+        FROM `admin`
+        <where>
+            <if test="condition.code != null and condition.code != ''">
+                id LIKE CONCAT('%',#{condition.code},'%') OR real_name LIKE CONCAT('%',#{condition.code},'%')
+            </if>
+        </where>
+        ORDER BY create_time DESC
     </select>
 </mapper>
 

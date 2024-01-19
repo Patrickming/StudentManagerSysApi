@@ -1,10 +1,12 @@
 package com.pdm.sms.dao.User;
 
+import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -48,5 +50,11 @@ public interface AdminMapper {
      */
     Integer checkCodeCount();
 
+    /**
+     * description: 获取管理员账号信息列表
+     * @param rowBounds
+     * @return java.util.List<com.zjh.sms.dto.User>
+     */
+    List<User> getAdminList(PageRowBounds rowBounds, @Param("condition") Map<String, Object> condition);
 
 }

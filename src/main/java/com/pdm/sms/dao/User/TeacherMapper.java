@@ -1,10 +1,12 @@
 package com.pdm.sms.dao.User;
 
+import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xrm
@@ -52,4 +54,11 @@ public interface TeacherMapper {
      * return: Integer
      */
     Integer checkCodeCount();
+
+    /**
+     * description: 获取教师账号信息列表
+     * @param rowBounds
+     * @return java.util.List<com.pdm.sms.dto.User>
+     */
+    List<User> getTeacherList(PageRowBounds rowBounds, @Param("condition") Map<String, Object> condition);
 }
