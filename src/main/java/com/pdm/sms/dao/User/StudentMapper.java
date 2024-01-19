@@ -59,4 +59,16 @@ public interface StudentMapper {
      * @return java.util.List<com.pdm.sms.dto.User>
      */
     List<User> getStudentList(PageRowBounds rowBounds, @Param("condition") Map<String, Object> condition);
+
+    /**
+     * description:得到账户列表
+     */
+    List<User> getStudentTree();
+
+    /**
+     * description: 根据专业获取该专业下的所有班级
+     * @param: String
+     * return: List<String>
+     */
+    List<String> getGradeByProfession(@Param("code") String code);
 }

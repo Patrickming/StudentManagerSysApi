@@ -38,4 +38,10 @@ public interface UserService {
      * @return void
      */
     boolean update(Map<String, Object> condition);
+
+    /**
+     * description: 获取树状数据
+     * return: List<Object>
+     */
+    List<Object> getTree();
 }

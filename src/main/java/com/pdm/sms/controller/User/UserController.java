@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,5 +53,10 @@ public class UserController {
         map.put("passwordAgain", condition.get("passwordAgain").toString());
         map.put("level", condition.get("level").toString());
         return userService.update(map);
+    }
+
+    @GetMapping("/getTree")
+    public List<Object> getTree() {
+        return userService.getTree();
     }
 }
