@@ -29,4 +29,82 @@
         </where>
     </select>
 
+    <insert id="addTeacher" parameterType="com.pdm.sms.dto.User">
+        INSERT INTO teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="realName != null and realName != ''">real_name,</if>
+            <if test="school != null and school != ''">school,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="profession != null and profession != ''">profession,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="realName != null and realName != ''">#{realName},</if>
+            <if test="school != null and school != ''">#{school},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="profession != null and profession != ''">#{profession},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="map">
+        DELETE FROM
+        teacher
+        <where>
+            id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+    <update id="update" parameterType="com.pdm.sms.dto.User">
+        UPDATE teacher
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="realName != null and realName != ''">
+                real_name = #{realName},
+            </if>
+
+            <if test="school != null and school != ''">
+                school = #{school},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="profession != null and profession != ''">
+                profession = #{profession},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="checkCodeCount" resultType="int">
+        select
+            count(0)
+        from
+            teacher
+    </select>
+
 </mapper>

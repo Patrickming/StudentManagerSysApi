@@ -30,5 +30,104 @@
         </where>
     </select>
 
+    <insert id="addStudent" parameterType="com.pdm.sms.dto.User">
+        INSERT INTO student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="realName != null and realName != ''">real_name,</if>
+            <if test="school != null and school != ''">school,</if>
+            <if test="admissionTime != null and admissionTime != ''">admission_time,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="profession != null and profession != ''">profession,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="grade != null and grade != ''">grade,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="realName != null and realName != ''">#{realName},</if>
+            <if test="school != null and school != ''">#{school},</if>
+            <if test="admissionTime != null and admissionTime != ''">#{admissionTime},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="profession != null and profession != ''">#{profession},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="map">
+        DELETE FROM
+        student
+        <where>
+            id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+    <update id="update" parameterType="com.pdm.sms.dto.User">
+        UPDATE student
+        <trim prefix="set" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="realName != null and realName != ''">
+                real_name = #{realName},
+            </if>
+
+            <if test="school != null and school != ''">
+                school = #{school},
+            </if>
+            <if test="admissionTime != null and admissionTime != ''">
+                admission_time = #{admissionTime},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="profession != null and profession != ''">
+                profession = #{profession},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="checkCodeCount" resultType="int">
+        select
+        count(0)
+        from
+        student
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                AND profession = #{condition.profession}
+            </if>
+            <if test="condition.grade != null and condition.grade != ''">
+                AND grade = #{condition.grade}
+            </if>
+        </where>
+    </select>
+
 </mapper>
 
