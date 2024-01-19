@@ -4,13 +4,13 @@ import com.pdm.sms.dto.Course;
 import com.pdm.sms.service.Course.CourseService;
 import com.pdm.sms.utils.page.PagingResult;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author xrm
@@ -31,6 +31,23 @@ public class CourseController {
         RowBounds rowBounds = new RowBounds(offset, limit);
         return courseService.getCourseList(rowBounds, condition);
     }
+
+    @PostMapping
+    public void addCourse(@RequestBody Course course) {
+        courseService.addCourse(course);
+    }
+
+    @DeleteMapping("/{ids}")
+    public void delete(@PathVariable("ids") String[] ids) {
+        List<Long> idsList = Stream.of(ids).map(Long::parseLong).collect(Collectors.toList());
+        courseService.delete(idsList);
+    }
+
+    @PutMapping
+    public void update(@RequestBody Course course) {
+        courseService.update(course);
+    }
+
 
 }
 

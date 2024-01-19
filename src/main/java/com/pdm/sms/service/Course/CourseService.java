@@ -4,6 +4,7 @@ import com.pdm.sms.dto.Course;
 import com.pdm.sms.utils.page.PagingResult;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,9 +16,33 @@ public interface CourseService {
 
     /**
      * description: 查询课程信息
+     *
      * @param: rowBounds
      * @param: condition
      * return: com.pdm.sms.utils.PagingResult
      */
     PagingResult<Course> getCourseList(RowBounds rowBounds, Map<String, Object> condition);
+
+    /**
+     * description: 新增课程信息
+     *
+     * @param course return void
+     */
+    void addCourse(Course course);
+
+    /**
+     * description: 删除课程信息
+     *
+     * @param ids
+     * @return void
+     */
+    void delete(List<Long> ids);
+
+    /**
+     * description: 修改课程信息
+     *
+     * @param course
+     * @return void
+     */
+    void update(Course course);
 }

@@ -27,4 +27,87 @@
         </where>
         ORDER BY create_time desc
     </select>
+
+
+    <insert id="addCourse" parameterType="com.pdm.sms.dto.Course">
+        INSERT INTO course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="name != null and name != ''">`name`,</if>
+            <if test="number != null and number != ''">`number`,</if>
+            <if test="credits != null and credits != ''">`credits`,</if>
+            <if test="score != null and score != ''">`score`,</if>
+            <if test="year != null and year != ''">`year`,</if>
+            <if test="type != null and type != ''">`type`,</if>
+            <if test="term != null and term != ''">term,</if>
+            <if test="profession != null and profession != ''">profession,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="number != null and number != ''">#{number},</if>
+            <if test="credits != null and credits != ''">#{credits},</if>
+            <if test="score != null and score != ''">#{score},</if>
+            <if test="year != null and year != ''">#{year},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="profession != null and profession != ''">#{profession},</if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="map">
+        DELETE FROM
+        course
+        <where>
+            id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+    <update id="update" parameterType="com.pdm.sms.dto.User">
+        UPDATE course
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="number != null and number != ''">
+                `number` = #{number},
+            </if>
+            <if test="credits != null and credits != ''">
+                credits = #{credits},
+            </if>
+            <if test="score != null and score != ''">
+                score = #{score},
+            </if>
+            <if test="year != null and year != ''">
+                `year`= #{year},
+            </if>
+            <if test="type != null and type != ''">
+                `type` = #{type},
+            </if>
+            <if test="term != null and term != ''">
+                term = #{term},
+            </if>
+            <if test="profession != null and profession != ''">
+                profession = #{profession},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="checkCodeCount" resultType="string">
+        select MAX(id) from course
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                profession = #{condition.profession}
+            </if>
+            <if test="condition.year != null and condition.year != ''">
+                AND year = #{condition.year}
+            </if>
+        </where>
+    </select>
 </mapper>
