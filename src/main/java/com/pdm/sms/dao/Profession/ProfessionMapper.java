@@ -38,5 +38,10 @@ public interface ProfessionMapper {
      */
     void addProfession(Profession profession);
 
+    /**
+     * description: 获取所有专业
+     * return: List<Profession>
+     */
+    List<Profession> getProfessionList();
 }
 
