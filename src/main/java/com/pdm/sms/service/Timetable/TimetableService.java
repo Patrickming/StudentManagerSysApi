@@ -14,8 +14,27 @@ public interface TimetableService {
 
     /**
      * description: 教师用户获取课程表
+     *
      * @param: condition
      * return: List<WeekCourse>
      */
     List<WeekCourse> getTimetableByTeacher(Map<String, Object> condition);
+
+    /**
+     * description: 管理员用户获取课程表
+     *
+     * @param condition
+     */
+    List<WeekCourse> getTimetable(Map<String, Object> condition);
+
+
+    /**
+     * description: 新增课程表
+     *
+     * @param list
+     * @return void
+     */
+    void add(List<WeekCourse> list);
+
+
 }
