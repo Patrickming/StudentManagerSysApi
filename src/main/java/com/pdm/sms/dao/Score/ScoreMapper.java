@@ -46,4 +46,23 @@ public interface ScoreMapper {
      * return: Course
      */
     Course getScoreById(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * description: 教师用户获取导出成绩列表
+     * @param: condition
+     * return: List<Course>
+     */
+    List<Course> getExportList(@Param("condition") Map<String, Object> condition);
+    /**
+     * description: 管理员用户获取导出成绩列表
+     * @param: condition
+     * return: List<Course>
+     */
+    List<Course> getExportListByAdmin(@Param("condition") Map<String, Object> condition);
+    /**
+     * description: 学生用户获取导出成绩列表
+     * @param: condition
+     * return: List<Course>
+     */
+    List<Course> getExportListByStudent(@Param("condition") Map<String, Object> condition);
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,11 @@ public class ScoreController {
                                               @RequestParam(required = false, name = "$offset", defaultValue = "0") Integer offset) {
         RowBounds rowBounds = new RowBounds(offset, limit);
         return scoreService.getCourseList(rowBounds, condition);
+    }
+
+    @GetMapping("/export")
+    public List<Course> getExportList(@RequestParam Map<String, Object> condition) {
+        return scoreService.getExportList(condition);
     }
 
 }

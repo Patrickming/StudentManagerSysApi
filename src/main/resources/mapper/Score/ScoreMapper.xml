@@ -139,4 +139,106 @@
             </if>
         </where>
     </select>
+    <select id="getExportList" resultMap="BaseUserMap" parameterType="map">
+        SELECT
+        b.*,
+        c.real_name,
+        c.id as no,
+        c.grade,
+        c.username as student_name,
+        d.point as pointByUser,
+        d.credits as creditsByUser,
+        d.score as scoreByUser
+        FROM teacher_course a
+        LEFT JOIN course b
+        ON a.course_id = b.id
+        LEFT JOIN student c
+        ON a.profession = c.profession and a.grade = c.grade
+        LEFT JOIN student_course d
+        ON c.id = d.student_id and a.course_id = d.course_id
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                a.profession = #{condition.profession}
+            </if>
+            <if test="condition.grade != null and condition.grade != ''">
+                AND a.grade = #{condition.grade}
+            </if>
+            <if test="condition.username != null and condition.username != ''">
+                AND a.teacher_id = #{condition.username}
+            </if>
+            <if test="condition.courseName != null and condition.courseName != ''">
+                AND a.name = #{condition.courseName}
+            </if>
+            <if test="condition.studentName != null and condition.studentName != ''">
+                AND d.student_id = #{condition.studentName}
+            </if>
+        </where>
+        ORDER BY c.id
+    </select>
+
+    <select id="getExportListByAdmin" resultMap="BaseUserMap" parameterType="map">
+        select
+        a.id as no,
+        a.real_name,
+        a.admission_time as year,
+        a.grade,
+        a.profession,
+        b.id,
+        b.name,
+        b.credits,
+        b.score,
+        b.number,
+        b.term,
+        b.type
+        FROM
+        student a
+        RIGHT join course b
+        on a.profession = b.profession
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                a.profession = #{condition.profession}
+            </if>
+            <if test="condition.grade != null and condition.grade != ''">
+                AND a.grade = #{condition.grade}
+            </if>
+            <if test="condition.courseName != null and condition.courseName != ''">
+                AND b.name = #{condition.courseName}
+            </if>
+        </where>
+        order by a.id
+    </select>
+    <select id="getExportListByStudent" resultMap="BaseUserMap" parameterType="map">
+        SELECT
+        a.student_id AS NO,
+        a.point as pointByUser,
+        a.credits as creditsByUser,
+        a.score as scoreByUser,
+        b.id,
+        b.real_name,
+        b.admission_time as year,
+        b.grade,
+        b.profession,
+        c.name,
+        c.credits,
+        c.score,
+        c.number,
+        c.term,
+        c.type
+        FROM
+        student_course a
+        LEFT JOIN student b ON a.student_id = b.id
+        LEFT JOIN course c on a.course_id = c.id
+        <where>
+            <if test="condition.studentName != null and condition.studentName != ''">
+                AND a.student_id = #{condition.studentName}
+            </if>
+            <if test="condition.year != null and condition.year != ''">
+                AND a.year = #{condition.year}
+            </if>
+            <if test="condition.term != null and condition.term != ''">
+                AND a.term = #{condition.term}
+            </if>
+        </where>
+        order by a.id
+    </select>
 </mapper>

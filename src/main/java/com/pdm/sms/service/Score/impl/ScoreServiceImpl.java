@@ -48,5 +48,24 @@ public class ScoreServiceImpl implements ScoreService {
         return new PagingResult<>(courseList, pageRowBounds.getTotal());
     }
 
-
+    @Override
+    public List<Course> getExportList(Map<String, Object> condition) {
+        List<Course> courseList = new ArrayList<>();
+        switch (condition.get("level").toString()) {
+            case "0":
+                courseList = scoreMapper.getExportListByAdmin(condition);
+                for (Course course : courseList) {
+                    scoreUtil.adminCourseMethod(course);
+                }
+                break;
+            case "1":
+                courseList = scoreMapper.getExportList(condition);
+                break;
+            case "2":
+                courseList = scoreMapper.getExportListByStudent(condition);
+                break;
+            default:
+        }
+        return courseList;
+    }
 }

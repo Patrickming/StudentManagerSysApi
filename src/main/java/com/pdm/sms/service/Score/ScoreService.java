@@ -22,5 +22,12 @@ public interface ScoreService {
      */
     PagingResult<Course> getCourseList(RowBounds rowBounds, Map<String, Object> condition);
 
+    /**
+     * description: 导出成绩到Excel
+     *
+     * @param: Map<String, Object> condition
+     * return: List<Course>
+     */
+    List<Course> getExportList(Map<String, Object> condition);
 
 }
