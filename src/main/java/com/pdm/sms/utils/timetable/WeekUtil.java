@@ -18,8 +18,8 @@ import java.util.Map;
 @Component
 public class WeekUtil {
     /*
-1. `dealWeek(WeekCourse weekCourse)`：这个方法用于处理 `weekCourse` 对象中没有课程的时间段，将其设置为 "——"。
-如果 `weekCourse` 对象的某一天（从星期一到星期日）为空或者是空字符串，那么这个方法就会把那一天设置为 "——"。
+1. `dealWeek(WeekCourse weekCourse)`：这个方法用于处理 `weekCourse` 对象中没有课程的时间段，将其设置为 "一"。
+如果 `weekCourse` 对象的某一天（从星期一到星期日）为空或者是空字符串，那么这个方法就会把那一天设置为 "一"。
 
 2. `dealMethod(List<WeekCourse> list, Map<String, Object> condition)`：
 
@@ -30,28 +30,28 @@ public class WeekUtil {
     private CourseInfoMapper courseInfoMapper;
 
 
-    //这个方法是处理没有课的时间段 把其空置为"——"
+    //这个方法是处理没有课的时间段 把其空置为"一"
     public  void dealWeek(WeekCourse weekCourse) {
         if (weekCourse.getMonday() == null || weekCourse.getMonday().equals("")) {
-            weekCourse.setMonday("——");
+            weekCourse.setMonday("一");
         }
         if (weekCourse.getTuesday() == null || weekCourse.getTuesday().equals("")) {
-            weekCourse.setTuesday("——");
+            weekCourse.setTuesday("一");
         }
         if (weekCourse.getWednesday() == null || weekCourse.getWednesday().equals("")) {
-            weekCourse.setWednesday("——");
+            weekCourse.setWednesday("一");
         }
         if (weekCourse.getThursday() == null || weekCourse.getThursday().equals("")) {
-            weekCourse.setThursday("——");
+            weekCourse.setThursday("一");
         }
         if (weekCourse.getFriday() == null || weekCourse.getFriday().equals("")) {
-            weekCourse.setFriday("——");
+            weekCourse.setFriday("一");
         }
         if (weekCourse.getSaturday() == null || weekCourse.getSaturday().equals("")) {
-            weekCourse.setSaturday("——");
+            weekCourse.setSaturday("一");
         }
         if (weekCourse.getSunday() == null || weekCourse.getSunday().equals("")) {
-            weekCourse.setSunday("——");
+            weekCourse.setSunday("一");
         }
     }
 
@@ -86,7 +86,7 @@ public class WeekUtil {
     /**
      *  这个方法首先从 `courseInfoMapper` 中获取 `CourseInfo` 对象。
      * 如果这个对象不为空，那么它会检查当前周（从 `map` 中获取）是否在课程的开始和结束周之间。
-     * 如果不在这个范围内，那么返回 "——"；否则，返回 `map` 中的 "name" 值。
+     * 如果不在这个范围内，那么返回 "一"；否则，返回 `map` 中的 "name" 值。
      * @param map
      * @return
      */
@@ -97,7 +97,7 @@ public class WeekUtil {
             int end = courseInfo.getEnd();
             int content = Integer.parseInt(map.get("week").toString());
             if (content < start || content > end) {
-                return "——";
+                return "一";
             }
         }
         return map.get("name").toString();

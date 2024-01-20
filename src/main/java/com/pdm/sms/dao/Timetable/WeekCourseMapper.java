@@ -21,4 +21,20 @@ public interface WeekCourseMapper {
      * return: List<WeekCourse>
      */
     List<WeekCourse> getWeekCourse(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * description: 新增week表数据
+     *
+     * @param weekCourse
+     * @return void
+     */
+    void add(WeekCourse weekCourse);
+
+    /**
+     * description: 修改week表
+     *
+     * @param: WeekCourse
+     * return: void
+     */
+    void update(WeekCourse weekCourse);
 }

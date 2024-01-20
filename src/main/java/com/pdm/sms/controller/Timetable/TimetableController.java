@@ -27,5 +27,22 @@ public class TimetableController {
         return timetableService.getTimetableByTeacher(condition);
     }
 
+    @GetMapping("/getTimetable")
+    public List<WeekCourse> getStudentList (@RequestParam Map<String, Object> condition) {
+        return timetableService.getTimetable(condition);
+    }
+
+
+    /**
+     * 新增、更新课程表
+     * @param WeekCourseList 课程表信息
+     *
+     */
+    @PostMapping
+    public void add(@RequestBody JSONArray weekCourseList) {
+        List<WeekCourse> list = JSONObject.parseArray(weekCourseList.toJSONString(), WeekCourse.class);
+        timetableService.add(list);
+    }
+
 }
 
