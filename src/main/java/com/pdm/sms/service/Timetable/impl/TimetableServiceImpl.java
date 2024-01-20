@@ -1,10 +1,14 @@
 package com.pdm.sms.service.Timetable.impl;
 
+import com.pdm.sms.dao.Course.CourseInfoMapper;
 import com.pdm.sms.dao.TeacherCourse.TeacherCourseMapper;
 import com.pdm.sms.dao.Timetable.TimetableMapper;
 import com.pdm.sms.dao.Timetable.WeekCourseMapper;
+import com.pdm.sms.dao.User.StudentMapper;
+import com.pdm.sms.domain.CourseInfo;
 import com.pdm.sms.domain.TeacherCourse;
 import com.pdm.sms.domain.Timetable;
+import com.pdm.sms.dto.User;
 import com.pdm.sms.dto.WeekCourse;
 import com.pdm.sms.service.Timetable.TimetableService;
 import com.pdm.sms.utils.timetable.WeekUtil;
@@ -28,9 +32,12 @@ public class TimetableServiceImpl implements TimetableService {
     private WeekCourseMapper weekCourseMapper;
     @Resource
     private TeacherCourseMapper teacherCourseMapper;
-
     @Resource
     private WeekUtil weekUtil;
+    @Resource
+    private CourseInfoMapper courseInfoMapper;
+    @Resource
+    private StudentMapper studentMapper;
 
 
     //其实就是把属于这个老师的课给他剥离出来
@@ -127,6 +134,26 @@ public class TimetableServiceImpl implements TimetableService {
                 timetableMapper.add(timetable);
             }
         }
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfo courseInfo) {
+        courseInfoMapper.updateCourseInfo(courseInfo);
+    }
+
+    @Override
+    public List<WeekCourse> getTimetableByStudent(Map<String, Object> condition) {
+
+        User user = studentMapper.getStudentById(condition.get("studentName").toString());
+        Map<String, Object> oldMap = new HashMap<>();
+        oldMap.put("profession", user.getProfession());
+        oldMap.put("grade", user.getGrade());
+        oldMap.put("year", condition.get("year"));
+        oldMap.put("term", condition.get("term"));
+        oldMap.put("week", condition.get("week"));
+        List<WeekCourse> list = weekCourseMapper.getWeekCourse(oldMap);
+        weekUtil.dealMethod(list, oldMap);
+        return list;
     }
 
 }
