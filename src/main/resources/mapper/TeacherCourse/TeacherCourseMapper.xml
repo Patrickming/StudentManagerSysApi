@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pdm.sms.dao.TeacherCourse.TeacherCourseMapper">
+    <resultMap id="BaseUserMap" type="com.pdm.sms.domain.TeacherCourse">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="teacher_id" property="teacherId" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="profession" property="profession" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="term" property="term" jdbcType="INTEGER"/>
+        <result column="course_id" property="courseId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getCourseListById" parameterType="string" resultMap="BaseUserMap">
+        SELECT
+        *
+        FROM teacher_course
+        <where>
+            teacher_id = #{id}
+        </where>
+    </select>
+
+    <select id="getGradeInfoByMap" parameterType="string" resultMap="BaseUserMap">
+        SELECT
+        name,
+        grade
+        FROM teacher_course
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                AND profession = #{condition.profession}
+            </if>
+            <if test="condition.teacherId != null and condition.teacherId != ''">
+                AND teacher_id = #{condition.teacherId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

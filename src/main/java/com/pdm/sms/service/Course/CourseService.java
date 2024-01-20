@@ -45,4 +45,12 @@ public interface CourseService {
      * @return void
      */
     void update(Course course);
+
+    /**
+     * description: 根据专业、学期获取课程列表
+     * @param:  Map<String, Object> condition
+     * return: List<Course>
+     */
+    List<Course> getCourseByMap(Map<String, Object> condition);
 }
+

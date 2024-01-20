@@ -48,6 +48,9 @@ public class CourseController {
         courseService.update(course);
     }
 
-
+    @GetMapping("/getCourseByMap")
+    private List<Course> getCourseByMap(@RequestParam Map<String, Object> condition) {
+        return courseService.getCourseByMap(condition);
+    }
 }
 
