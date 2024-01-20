@@ -148,8 +148,7 @@
         ORDER BY id DESC
     </select>
     <select id="getStudentTree" resultType="com.pdm.sms.dto.User">
-        SELECT
-            profession
+        SELECT profession
         FROM student
     </select>
 
@@ -161,6 +160,14 @@
             <if test="code != null and code != ''">
                 AND profession = #{code}
             </if>
+        </where>
+    </select>
+    <select id="getStudentById" resultMap="BaseUserMap" parameterType="string">
+        SELECT
+        *
+        FROM student
+        <where>
+            id = #{id}
         </where>
     </select>
 

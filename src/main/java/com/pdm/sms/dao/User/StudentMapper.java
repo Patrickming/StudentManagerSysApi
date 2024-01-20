@@ -55,6 +55,7 @@ public interface StudentMapper {
 
     /**
      * description: 获取学生账号信息列表
+     *
      * @param rowBounds
      * @return java.util.List<com.pdm.sms.dto.User>
      */
@@ -67,8 +68,14 @@ public interface StudentMapper {
 
     /**
      * description: 根据专业获取该专业下的所有班级
+     *
      * @param: String
      * return: List<String>
      */
     List<String> getGradeByProfession(@Param("code") String code);
+
+    /**
+     * description: 根据id获取学生信息
+     */
+    User getStudentById(@Param("id") String id);
 }

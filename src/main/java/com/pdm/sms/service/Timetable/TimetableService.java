@@ -45,4 +45,11 @@ public interface TimetableService {
      */
     void updateCourseInfo(CourseInfo courseInfo);
 
+    /**
+     * description: 学生用户获取课程表
+     * @param: condition
+     * return: List<WeekCourse>
+     */
+    List<WeekCourse> getTimetableByStudent(Map<String, Object> condition);
+
 }
