@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pdm.sms.dao.Timetable.TimetableMapper">
+
+    <select id="checkCount" resultType="int" parameterType="map">
+        select count(0) from timetable
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                profession = #{condition.profession}
+            </if>
+            <if test="condition.grade != null and condition.grade != ''">
+                AND grade = #{condition.grade}
+            </if>
+            <if test="condition.year != null and condition.year != ''">
+                AND year = #{condition.year}
+            </if>
+            <if test="condition.term != null and condition.term != ''">
+                AND term = #{condition.term}
+            </if>
+            <if test="condition.week != null and condition.week != ''">
+                AND week_num = #{condition.week}
+            </if>
+        </where>
+    </select>
+</mapper>

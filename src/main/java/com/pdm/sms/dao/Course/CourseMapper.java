@@ -56,4 +56,11 @@ public interface CourseMapper {
      * return: Integer
      */
     String checkCodeCount(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * description: 根据专业、学期获取课程列表
+     * @param: condition
+     * return:  List<Course>
+     */
+    List<Course> getCourseByMap(@Param("condition") Map<String, Object> condition);
 }

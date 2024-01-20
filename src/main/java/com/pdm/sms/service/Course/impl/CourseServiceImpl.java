@@ -40,7 +40,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void addCourse(Course course) {
-        Profession profession =  professionMapper.getProfessionIdByName(course.getProfession());
+        Profession profession = professionMapper.getProfessionIdByName(course.getProfession());
         String id = "";
         String str = course.getYear().toString() + "0" + profession.getId() + course.getTerm();
         Map<String, Object> condition = new HashMap<>();
@@ -52,7 +52,7 @@ public class CourseServiceImpl implements CourseService {
             String a = value.substring(value.length() - 3);
             int num = Integer.parseInt(a) + 1;
             if (num < 10) {
-                strValue =  "00" + num;
+                strValue = "00" + num;
             } else if (num < 100) {
                 strValue = "0" + num;
             } else {
@@ -96,5 +96,10 @@ public class CourseServiceImpl implements CourseService {
         courseInfoMapper.updateCourseInfo(courseInfo);
     }
 
+    //多表联查获取到所有的课程信息返回给前端处理
+    @Override
+    public List<Course> getCourseByMap(Map<String, Object> condition) {
+        return courseMapper.getCourseByMap(condition);
+    }
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pdm.sms.dao.Timetable.WeekCourseMapper">
+    <resultMap id="BaseUserMap" type="com.pdm.sms.dto.WeekCourse" >
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="monday" property="monday" jdbcType="VARCHAR" />
+        <result column="tuesday" property="tuesday" jdbcType="VARCHAR" />
+        <result column="wednesday" property="wednesday" jdbcType="VARCHAR" />
+        <result column="thursday" property="thursday" jdbcType="VARCHAR" />
+        <result column="friday" property="friday" jdbcType="VARCHAR" />
+        <result column="saturday" property="saturday" jdbcType="VARCHAR" />
+        <result column="sunday" property="sunday" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getWeekCourse" parameterType="map" resultMap="BaseUserMap">
+        select
+        a.*
+        from
+        week a
+        left join timetable b
+        on a.id = b.week_id
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                AND b.profession = #{condition.profession}
+            </if>
+            <if test="condition.grade != null and condition.grade != ''">
+                AND b.grade = #{condition.grade}
+            </if>
+            <if test="condition.year != null and condition.year != ''">
+                AND year = #{condition.year}
+            </if>
+            <if test="condition.term != null and condition.term != ''">
+                AND term = #{condition.term}
+            </if>
+            <if test="condition.week != null and condition.week != ''">
+                AND week_num = #{condition.week}
+            </if>
+        </where>
+    </select>
+</mapper>

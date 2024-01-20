@@ -110,4 +110,34 @@
             </if>
         </where>
     </select>
+
+    <select id="getCourseByMap" resultMap="BaseUserMap" parameterType="map">
+        SELECT
+        a.*,
+        c.real_name,
+        d.start,
+        d.end,
+        d.room
+        FROM course a
+        left join teacher_course b
+        on a.id = b.course_id
+        left join teacher c
+        on b.teacher_id = c.id
+        left join course_info d
+        on a.id = d.course_id
+        <where>
+            <if test="condition.profession != null and condition.profession != ''">
+                a.profession = #{condition.profession}
+            </if>
+            <if test="condition.term != null and condition.term != ''">
+                AND a.term = #{condition.term}
+            </if>
+            <if test="condition.courseName != null and condition.courseName != ''">
+                AND a.name = #{condition.courseName}
+            </if>
+            <if test="condition.year != null and condition.year != ''">
+                AND a.year = #{condition.year}
+            </if>
+        </where>
+    </select>
 </mapper>

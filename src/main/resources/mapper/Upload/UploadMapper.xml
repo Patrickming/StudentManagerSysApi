@@ -10,7 +10,7 @@
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="level" property="level" jdbcType="INTEGER" />
     </resultMap>
-    <insert id="add" parameterType="com.pdm.sms.dto.Timetable">
+    <insert id="add" parameterType="com.pdm.sms.domain.Upload">
         INSERT INTO upload
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null and userId != ''">user_id,</if>
