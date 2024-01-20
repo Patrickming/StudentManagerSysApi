@@ -2,6 +2,7 @@ package com.pdm.sms.controller.Timetable;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pdm.sms.domain.CourseInfo;
 import com.pdm.sms.dto.WeekCourse;
 import com.pdm.sms.service.Timetable.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class TimetableController {
         timetableService.add(list);
     }
 
+    @PostMapping("/updateCourseInfo")
+    public void updateCourseInfo(@RequestBody CourseInfo courseInfo) {
+        timetableService.updateCourseInfo(courseInfo);
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.pdm.sms.service.Timetable;
 
+import com.pdm.sms.domain.CourseInfo;
 import com.pdm.sms.dto.WeekCourse;
 
 import java.util.List;
@@ -36,5 +37,12 @@ public interface TimetableService {
      */
     void add(List<WeekCourse> list);
 
+    /**
+     * description: 新增课程具体安排（周数等）
+     *
+     * @param: CourseInfo
+     * return: void
+     */
+    void updateCourseInfo(CourseInfo courseInfo);
 
 }

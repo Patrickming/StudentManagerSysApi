@@ -1,8 +1,10 @@
 package com.pdm.sms.service.Timetable.impl;
 
+import com.pdm.sms.dao.Course.CourseInfoMapper;
 import com.pdm.sms.dao.TeacherCourse.TeacherCourseMapper;
 import com.pdm.sms.dao.Timetable.TimetableMapper;
 import com.pdm.sms.dao.Timetable.WeekCourseMapper;
+import com.pdm.sms.domain.CourseInfo;
 import com.pdm.sms.domain.TeacherCourse;
 import com.pdm.sms.domain.Timetable;
 import com.pdm.sms.dto.WeekCourse;
@@ -28,9 +30,10 @@ public class TimetableServiceImpl implements TimetableService {
     private WeekCourseMapper weekCourseMapper;
     @Resource
     private TeacherCourseMapper teacherCourseMapper;
-
     @Resource
     private WeekUtil weekUtil;
+    @Resource
+    private CourseInfoMapper courseInfoMapper;
 
 
     //其实就是把属于这个老师的课给他剥离出来
@@ -127,6 +130,11 @@ public class TimetableServiceImpl implements TimetableService {
                 timetableMapper.add(timetable);
             }
         }
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfo courseInfo) {
+        courseInfoMapper.updateCourseInfo(courseInfo);
     }
 
 }
