@@ -23,10 +23,10 @@ public interface TeacherCourseMapper {
 
 
 
-//    /**
-//     * description: 获取教师id和专业获取班级、课程名
-//     * @param:
-//     * return: List<TeacherCourse>
-//     */
-//    List<TeacherCourse> getGradeInfoByMap(@Param("condition") Map<String, Object> condition);
+    /**
+     * description: 获取教师id和专业获取班级、课程名
+     * @param:
+     * return: List<TeacherCourse>
+     */
+    List<TeacherCourse> getGradeInfoByMap(@Param("condition") Map<String, Object> condition);
 }

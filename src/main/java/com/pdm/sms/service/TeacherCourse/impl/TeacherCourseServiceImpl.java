@@ -5,6 +5,7 @@ import com.pdm.sms.dao.Profession.ProfessionMapper;
 import com.pdm.sms.dao.TeacherCourse.TeacherCourseMapper;
 import com.pdm.sms.dao.User.StudentMapper;
 import com.pdm.sms.domain.Profession;
+import com.pdm.sms.domain.TeacherCourse;
 import com.pdm.sms.dto.Course;
 import com.pdm.sms.service.TeacherCourse.TeacherCourseService;
 import org.springframework.stereotype.Service;
@@ -61,30 +62,30 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
         return arr;
     }
 
-//    @Override
-//    public List<Map<String, Object>> getProfessionInfoByTeacher(String teacherId) {
-//        List<TeacherCourse> list = teacherCourseMapper.getCourseListById(teacherId);
-//        List<Map<String, Object>> arr = new ArrayList<>();
-//        Set<String> professionSet = new HashSet<>();
-//        for (TeacherCourse teacherCourse : list) {
-//            professionSet.add(teacherCourse.getProfession());
-//        }
-//        for (String s : professionSet) {
-//            Map<String, Object> condition = new HashMap<>();
-//            condition.put("teacherId", teacherId);
-//            condition.put("profession", s);
-//            List<TeacherCourse> listObj = teacherCourseMapper.getGradeInfoByMap(condition);
-//            Set<String> gradeSet = new HashSet<>();
-//            Set<String> courseSet = new HashSet<>();
-//            for (TeacherCourse teacherCourse : listObj) {
-//                gradeSet.add(teacherCourse.getGrade());
-//                courseSet.add(teacherCourse.getName());
-//            }
-//            condition.put("grade", gradeSet);
-//            condition.put("course", courseSet);
-//            arr.add(condition);
-//        }
-//        return arr;
-//    }
+    @Override
+    public List<Map<String, Object>> getProfessionInfoByTeacher(String teacherId) {
+        List<TeacherCourse> list = teacherCourseMapper.getCourseListById(teacherId);
+        List<Map<String, Object>> arr = new ArrayList<>();
+        Set<String> professionSet = new HashSet<>();
+        for (TeacherCourse teacherCourse : list) {
+            professionSet.add(teacherCourse.getProfession());
+        }
+        for (String s : professionSet) {
+            Map<String, Object> condition = new HashMap<>();
+            condition.put("teacherId", teacherId);
+            condition.put("profession", s);
+            List<TeacherCourse> listObj = teacherCourseMapper.getGradeInfoByMap(condition);
+            Set<String> gradeSet = new HashSet<>();
+            Set<String> courseSet = new HashSet<>();
+            for (TeacherCourse teacherCourse : listObj) {
+                gradeSet.add(teacherCourse.getGrade());
+                courseSet.add(teacherCourse.getName());
+            }
+            condition.put("grade", gradeSet);
+            condition.put("course", courseSet);
+            arr.add(condition);
+        }
+        return arr;
+    }
 
 }

@@ -16,10 +16,10 @@ public interface TeacherCourseService {
      */
     List<Map<String, Object>> getProfessionInfoByAdmin();
 
-//    /**
-//     * description: 根据教师id获取教师用户所管理的专业、班级、课程名等信息
-//     * @param: String
-//     * return: List<Map<String, Object>>
-//     */
-//    List<Map<String, Object>> getProfessionInfoByTeacher(String teacherId);
+    /**
+     * description: 根据教师id获取教师用户所管理的专业、班级、课程名等信息
+     * @param: String
+     * return: List<Map<String, Object>>
+     */
+    List<Map<String, Object>> getProfessionInfoByTeacher(String teacherId);
 }
