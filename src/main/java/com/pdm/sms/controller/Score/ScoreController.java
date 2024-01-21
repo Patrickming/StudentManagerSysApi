@@ -1,13 +1,13 @@
 package com.pdm.sms.controller.Score;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.pdm.sms.dto.Course;
+import com.pdm.sms.dto.Score;
 import com.pdm.sms.service.Score.ScoreService;
 import com.pdm.sms.utils.page.PagingResult;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,5 +37,13 @@ public class ScoreController {
     public List<Course> getExportList(@RequestParam Map<String, Object> condition) {
         return scoreService.getExportList(condition);
     }
+
+    @PostMapping
+    private void addEntry(@RequestBody JSONArray userScore) {
+        List<Score> list = JSONObject.parseArray(userScore.toJSONString(), Score.class);
+        scoreService.addEntry(list);
+    }
+
+
 
 }

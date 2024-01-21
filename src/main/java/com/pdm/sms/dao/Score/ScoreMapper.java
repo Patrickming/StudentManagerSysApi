@@ -2,6 +2,7 @@ package com.pdm.sms.dao.Score;
 
 import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dto.Course;
+import com.pdm.sms.dto.Score;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -65,4 +66,28 @@ public interface ScoreMapper {
      * return: List<Course>
      */
     List<Course> getExportListByStudent(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * description: 录入成绩
+     * @param: Score
+     * return: void
+     * Author: rabbiter
+     * @Date: 2022/3/19 16:23
+     */
+    void addEntry(Score score);
+    /**
+     * description: 修改成绩
+     * @param: Score
+     * return: void
+     * Author: rabbiter
+     * @Date: 2022/3/20 11:52
+     */
+    void updateEntry(Score score);
+    /**
+     * description: 查看是否录入成绩
+     * return: Integer
+     * Author: rabbiter
+     * @Date: 2022/3/11 15:03
+     */
+    Integer checkCount(@Param("condition") Map<String, Object> condition);
 }

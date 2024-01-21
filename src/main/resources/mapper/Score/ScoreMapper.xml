@@ -20,6 +20,7 @@
         <result column="creditsByUser" property="creditsByUser" jdbcType="VARCHAR"/>
         <result column="scoreByUser" property="scoreByUser" jdbcType="VARCHAR"/>
     </resultMap>
+
     <select id="getCourseByMap" resultMap="BaseUserMap" parameterType="map">
         SELECT
         b.*,
@@ -240,5 +241,67 @@
             </if>
         </where>
         order by a.id
+    </select>
+
+    <insert id="addEntry" parameterType="com.pdm.sms.dto.Score">
+        INSERT INTO student_course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="no != null and no != ''">student_id,</if>
+            <if test="name != null and name != ''">`name`,</if>
+            <if test="creditsByUser != null and creditsByUser != ''">`credits`,</if>
+            <if test="pointByUser != null and pointByUser != ''">`point`,</if>
+            <if test="scoreByUser != null and scoreByUser != ''">`score`,</if>
+            <if test="year != null and year != ''">`year`,</if>
+            <if test="term != null and term != ''">term,</if>
+            <if test="courseId != null and courseId != ''">course_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="no != null and no != ''">#{no},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="creditsByUser != null and creditsByUser != ''">#{creditsByUser},</if>
+            <if test="pointByUser != null and pointByUser != ''">#{pointByUser},</if>
+            <if test="scoreByUser != null and scoreByUser != ''">#{scoreByUser},</if>
+            <if test="year != null and year != ''">#{year},</if>
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="courseId != null and courseId != ''">#{courseId},</if>
+        </trim>
+    </insert>
+    <update id="updateEntry" parameterType="com.pdm.sms.dto.Score">
+        UPDATE student_course
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="creditsByUser != null and creditsByUser != ''">
+                credits = #{creditsByUser},
+            </if>
+            <if test="pointByUser != null and pointByUser != ''">
+                point = #{pointByUser},
+            </if>
+            <if test="scoreByUser != null and scoreByUser != ''">
+                score = #{scoreByUser},
+            </if>
+            <if test="year != null and year != ''">
+                `year`= #{year},
+            </if>
+            <if test="term != null and term != ''">
+                term = #{term},
+            </if>
+        </trim>
+        <where>
+            <if test="no != null and no != ''">
+                student_id = #{no}
+            </if>
+            <if test="name != null and name != ''">
+                AND `name` = #{name}
+            </if>
+        </where>
+    </update>
+    <select id="checkCount" resultType="int" parameterType="map">
+        select count(0) from student_course
+        <where>
+            student_id = #{condition.StudentId}
+            AND `name` = #{condition.CourseName}
+        </where>
     </select>
 </mapper>

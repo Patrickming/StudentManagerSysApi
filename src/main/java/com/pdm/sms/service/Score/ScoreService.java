@@ -1,6 +1,7 @@
 package com.pdm.sms.service.Score;
 
 import com.pdm.sms.dto.Course;
+import com.pdm.sms.dto.Score;
 import com.pdm.sms.utils.page.PagingResult;
 import org.apache.ibatis.session.RowBounds;
 
@@ -29,5 +30,13 @@ public interface ScoreService {
      * return: List<Course>
      */
     List<Course> getExportList(Map<String, Object> condition);
+
+
+    /**
+     * description: 录入成绩
+     * @param: List<Score>
+     * return: void
+     */
+    void addEntry(List<Score> list);
 
 }

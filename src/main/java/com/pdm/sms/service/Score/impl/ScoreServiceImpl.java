@@ -3,6 +3,7 @@ package com.pdm.sms.service.Score.impl;
 import com.github.pagehelper.PageRowBounds;
 import com.pdm.sms.dao.Score.ScoreMapper;
 import com.pdm.sms.dto.Course;
+import com.pdm.sms.dto.Score;
 import com.pdm.sms.service.Score.ScoreService;
 import com.pdm.sms.utils.Score.ScoreUtil;
 import com.pdm.sms.utils.page.PagingResult;
@@ -10,7 +11,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,5 +70,30 @@ public class ScoreServiceImpl implements ScoreService {
             default:
         }
         return courseList;
+    }
+
+    @Override
+    public void addEntry(List<Score> list) {
+        for (Score score : list) {
+            // string转double
+            double scoreByUser = Double.parseDouble(score.getScoreByUser());
+            BigDecimal bg = new BigDecimal((scoreByUser/10-5));
+            // 取两位有效数字
+            double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            String point = scoreByUser > 59 ? String.valueOf(f1):"0";
+            String credits = scoreByUser >= score.getScore()*0.6 ? score.getCredits() : "0.00";
+            score.setPointByUser(point);
+            score.setCreditsByUser(credits);
+            score.setCourseId(Long.toString(score.getId()));
+            Map<String, Object> condition = new HashMap<>();
+            condition.put("StudentId", score.getNo());
+            condition.put("CourseName", score.getName());
+            Integer num = scoreMapper.checkCount(condition);
+            if (num == 0) {
+                scoreMapper.addEntry(score);
+            } else {
+                scoreMapper.updateEntry(score);
+            }
+        }
     }
 }
