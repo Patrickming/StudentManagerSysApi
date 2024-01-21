@@ -96,4 +96,56 @@ public class ScoreServiceImpl implements ScoreService {
             }
         }
     }
+
+    @Override
+    public List<Map<String, Object>> getUserNum(Map<String, Object> condition) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<Course> courseList = new ArrayList<>();
+        switch (condition.get("level").toString()) {
+            case "0":
+                courseList = scoreMapper.getExportListByAdmin(condition);
+                for (Course course : courseList) {
+                    scoreUtil.adminCourseMethod(course);
+                }
+                list = scoreUtil.dealScore(courseList);
+                break;
+            case "1":
+                courseList = scoreMapper.getExportList(condition);
+                list = scoreUtil.dealScore(courseList);
+                break;
+            case "2":
+                courseList = scoreMapper.getExportListByStudent(condition);
+                list = scoreUtil.dealScore(courseList);
+        }
+        return list;
+    }
+
+    @Override
+    public Map<String, Object> getUserTotal(Map<String, Object> condition) {
+        String level = condition.get("level").toString();
+        if (level.equals("2")) {
+            List<Course> list = scoreMapper.getStudentTotal(condition);
+            double credits = 0.00;
+            double point = 0.00;
+            for (Course course : list) {
+                double a = Double.parseDouble(course.getCreditsByUser());
+                credits += a;
+                double b = Double.parseDouble(course.getPointByUser());
+                point += b;
+            }
+            Map<String, Object> map = new HashMap<>();
+            map.put("credits", credits);
+            map.put("point", point);
+            return map;
+        } else if (level.equals("1")) {
+            List<Course> courseList = scoreMapper.getExportList(condition);
+            return scoreUtil.getLimit(courseList);
+        } else {
+            List<Course> courseList = scoreMapper.getExportListByAdmin(condition);
+            for (Course course : courseList) {
+                scoreUtil.adminCourseMethod(course);
+            }
+            return scoreUtil.getLimit(courseList);
+        }
+    }
 }

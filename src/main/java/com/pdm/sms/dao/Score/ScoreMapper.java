@@ -50,18 +50,23 @@ public interface ScoreMapper {
 
     /**
      * description: 教师用户获取导出成绩列表
+     *
      * @param: condition
      * return: List<Course>
      */
     List<Course> getExportList(@Param("condition") Map<String, Object> condition);
+
     /**
      * description: 管理员用户获取导出成绩列表
+     *
      * @param: condition
      * return: List<Course>
      */
     List<Course> getExportListByAdmin(@Param("condition") Map<String, Object> condition);
+
     /**
      * description: 学生用户获取导出成绩列表
+     *
      * @param: condition
      * return: List<Course>
      */
@@ -69,25 +74,38 @@ public interface ScoreMapper {
 
     /**
      * description: 录入成绩
+     *
      * @param: Score
      * return: void
      * Author: rabbiter
      * @Date: 2022/3/19 16:23
      */
     void addEntry(Score score);
+
     /**
      * description: 修改成绩
+     *
      * @param: Score
      * return: void
      * Author: rabbiter
      * @Date: 2022/3/20 11:52
      */
     void updateEntry(Score score);
+
     /**
      * description: 查看是否录入成绩
      * return: Integer
      * Author: rabbiter
+     *
      * @Date: 2022/3/11 15:03
      */
     Integer checkCount(@Param("condition") Map<String, Object> condition);
+
+    /**
+     * description: 根据学生id获取所有课程的绩点和学分
+     *
+     * @param: condition
+     * return:  List<Course>
+     */
+    List<Course> getStudentTotal(@Param("condition") Map<String, Object> condition);
 }

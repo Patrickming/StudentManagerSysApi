@@ -44,6 +44,16 @@ public class ScoreController {
         scoreService.addEntry(list);
     }
 
+    @GetMapping("/getUserNum")
+    public List<Map<String, Object>> getUserNum(@RequestParam Map<String, Object> condition) {
+        return scoreService.getUserNum(condition);
+    }
+
+    @GetMapping("/getUserTotal")
+    public Map<String, Object> getUserTotal(@RequestParam Map<String, Object> condition) {
+        return scoreService.getUserTotal(condition);
+    }
+
 
 
 }

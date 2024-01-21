@@ -304,4 +304,16 @@
             AND `name` = #{condition.CourseName}
         </where>
     </select>
+
+    <select id="getStudentTotal" resultMap="BaseUserMap" parameterType="map">
+        SELECT
+        credits as creditsByUser,
+        point as pointByUser
+        FROM student_course
+        <where>
+            <if test="condition.studentName != null and condition.studentName != ''">
+                AND student_id = #{condition.studentName}
+            </if>
+        </where>
+    </select>
 </mapper>

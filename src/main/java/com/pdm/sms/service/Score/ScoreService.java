@@ -34,9 +34,25 @@ public interface ScoreService {
 
     /**
      * description: 录入成绩
+     *
      * @param: List<Score>
      * return: void
      */
     void addEntry(List<Score> list);
 
+    /**
+     * description: 根据成绩划分等级（不及格、及格、优秀）
+     *
+     * @param: Map<String, Object> condition
+     * return: List<Map<String, Object>>
+     */
+    List<Map<String, Object>> getUserNum(Map<String, Object> condition);
+
+    /**
+     * description: 学生用户根据id获取总学分和总绩点
+     *
+     * @param: Map<String, Object> condition
+     * return: Map<String, Object>
+     */
+    Map<String, Object> getUserTotal(Map<String, Object> condition);
 }
