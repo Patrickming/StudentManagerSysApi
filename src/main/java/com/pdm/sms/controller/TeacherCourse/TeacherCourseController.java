@@ -28,10 +28,10 @@ public class TeacherCourseController {
         return teacherCourseService.getProfessionInfoByAdmin();
     }
 
-//    @GetMapping("/getProfessionInfoByTeacher/{teacherId}")
-//    public List<Map<String, Object>> getProfessionInfoByTeacher(@PathVariable("teacherId") String teacherId) {
-//        return teacherCourseService.getProfessionInfoByTeacher(teacherId);
-//    }
+    @GetMapping("/getProfessionInfoByTeacher/{teacherId}")
+    public List<Map<String, Object>> getProfessionInfoByTeacher(@PathVariable("teacherId") String teacherId) {
+        return teacherCourseService.getProfessionInfoByTeacher(teacherId);
+    }
 
 }
 
