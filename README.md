@@ -23,7 +23,7 @@ StudentManagerSystem - JavaApi-backend
 application.properties
 
 ```properties
-server.port=9121
+server.port=8080
 
 jdbc.driver=com.mysql.cj.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/student_manager_system?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
