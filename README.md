@@ -11,8 +11,12 @@ StudentManagerSystem - JavaApi-backend
 
 #### 安装教程
 
-1. 导入数据库数据
-   运行`student_manager_system.sql`
+1. 数据库配置
+   数据库配置：版本8.0.29，
+   数据库名称：student_manager_system，
+   字符集：utf8mb4 排序规则：utf8mb4_bin，
+   导入数据：运行`student_manager_system.sql`，
+
 
 2. 修改端口
 
